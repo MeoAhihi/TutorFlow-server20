@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "tutorflow",
+    "password": "tutorflow",
+    "database": "tutorflow20",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "tutorflow",
+    "password": "tutorflow",
+    "database": "tutorflow20",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "tutorflow",
+    "password": "tutorflow",
+    "database": "tutorflow20",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
