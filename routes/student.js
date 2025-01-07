@@ -110,9 +110,7 @@ router.get("/:studentId", async (req, res, next) => {
   try {
     const studentProfile = await validateStudentProfile(tutorId, studentId);
     const student = await studentProfile.getUser();
-    res.json({
-      student: { ...student, ...studentProfile },
-    });
+    res.json({ student, profile: studentProfile });
   } catch (err) {
     if (err.message === "No Student profile found")
       return next(createError.NotFound("No Student profile found"));
