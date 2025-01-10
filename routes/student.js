@@ -121,14 +121,16 @@ router.get("/:studentId", async (req, res, next) => {
 router.patch("/:studentId", async (req, res, next) => {
   const { studentId } = req.params;
   const { id: tutorId } = req.decoded;
+  console.log(
+    req.body,
+    filterObject(req.body, studentProfileFields),
+    filterObject(req.body, studentBasicFields)
+  );
   try {
     const studentProfile = await validateStudentProfile(tutorId, studentId);
-    studentProfile = await studentProfile.update(
-      filterObject(req.body, studentProfileFields)
-    );
-    const student = await studentProfile.update(
-      filterObject(req.body, studentBasicFields)
-    );
+    await studentProfile.update(filterObject(req.body, studentProfileFields));
+    const student = await studentProfile.getUser();
+    await student.update(filterObject(req.body, studentBasicFields));
     res.json({
       message: "Student information updated successfully",
       student: student,
