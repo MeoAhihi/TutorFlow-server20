@@ -122,7 +122,7 @@ router.patch("/:studentId", async (req, res, next) => {
   const { studentId } = req.params;
   const { id: tutorId } = req.decoded;
   try {
-    var studentProfile = await validateStudentProfile(tutorId, studentId);
+    const studentProfile = await validateStudentProfile(tutorId, studentId);
     studentProfile = await studentProfile.update(
       filterObject(req.body, studentProfileFields)
     );
@@ -131,7 +131,8 @@ router.patch("/:studentId", async (req, res, next) => {
     );
     res.json({
       message: "Student information updated successfully",
-      newStudent: { ...student, ...studentProfile },
+      student: student,
+      profile: studentProfile,
     });
   } catch (err) {
     next(err);
@@ -148,7 +149,8 @@ router.delete("/:studentId", async (req, res, next) => {
     await student.destroy();
     res.json({
       message: "student profile deleted successlly",
-      student: { ...student, ...studentProfile },
+      student: student,
+      profile: studentProfile,
     });
   } catch (err) {
     next(err);
